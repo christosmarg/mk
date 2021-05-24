@@ -28,28 +28,28 @@ ${LIB}: ${OBJ}
 	${CC} -c ${CFLAGS} $<
 
 dist: clean
-	${MKDIR} ${DIST}
-	${CP} -R <++> ${DIST}
-	${TAR} ${DIST}.tar ${DIST}
-	${GZIP} ${DIST}.tar
-	${RM_DIR} ${DIST}
+	mkdir -p ${DIST}
+	cp -R <++> ${DIST}
+	tar -cf ${DIST}.tar ${DIST}
+	gzip ${DIST}.tar
+	rm -rf ${DIST}
 
 install: all
-	${MKDIR} ${DESTDIR}${LIB_DIR} ${DESTDIR}${INC_DIR} ${DESTDIR}${MAN_DIR}
-	${CP} ${LIB}.h ${DESTDIR}${INC_DIR}
-	${CP} lib${LIB}.a ${DESTDIR}${LIB_DIR}
-	${CP} ${MAN3} ${DESTDIR}${MAN_DIR}
-	sed "s/VERSION/${VERSION}/g" < ${MAN3} > ${DESTDIR}${MAN_DIR}/${MAN3}
+	mkdir -p ${DESTDIR}${LIBDIR} ${DESTDIR}${INCDIR} ${DESTDIR}${MANPREFIX}/man3
+	cp -f ${LIB}.h ${DESTDIR}${INCDIR}
+	cp -f lib${LIB}.a ${DESTDIR}${LIBDIR}
+	cp -f ${MAN3} ${DESTDIR}${MANPREFIX}/man3
+	sed "s/VERSION/${VERSION}/g" < ${MAN3} > ${DESTDIR}${MANPREFIX}/man3/${MAN3}
 	chmod 755 ${DESTDIR}${INC_DIR}/${LIB}.h
 	chmod 644 ${DESTDIR}${LIB_DIR}/lib${LIB}.a
-	chmod 644 ${DESTDIR}${MAN_DIR}/${MAN3}
+	chmod 644 ${DESTDIR}${MANPREFIX}/man3/${MAN3}
 
 uninstall:
-	${RM} ${DESTDIR}${INC_DIR}/${LIB}.h
-	${RM} ${DESTDIR}${LIB_DIR}/lib${LIB}.a
-	${RM} ${DESTDIR}${MAN_DIR}/${MAN3}
+	rm -f ${DESTDIR}${INCDIR}/${LIB}.h \
+		${DESTDIR}${LIBDIR}/lib${LIB}.a \
+		${DESTDIR}${MANPREFIX}/man3/${MAN3}
 
 clean:
-	${RM} ${LIB} ${OBJ} lib${LIB}.a ${DIST}.tar.gz
+	rm -f ${LIB} ${OBJ} lib${LIB}.a ${DIST}.tar.gz *.core
 
 .PHONY: all options clean dist install uninstall

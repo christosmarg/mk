@@ -5,6 +5,8 @@ VERSION = <++>
 # paths
 PREFIX = /usr/local
 MANPREFIX = ${PREFIX}/share/man
+# OpenBSD
+#MANPREFIX = ${PREFIX}/man
 # uncomment if you're building a library
 #INCDIR = ${PREFIX}/include
 #LIBDIR = ${PREFIX}/lib

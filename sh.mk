@@ -2,15 +2,16 @@
 # <++>
 .POSIX:
 
-SH = <++>
+TARGS = <++>
 VERSION = <++>
-DIST = ${SH}-${VERSION}
-MAN1 = ${SH}.1
+DIST = <++>-${VERSION}
 PREFIX = /usr/local
 MANPREFIX = ${PREFIX}/share/man
+# OpenBSD
+#MANPREFIX = ${PREFIX}/man
 
-all: ${SH}
-	chmod +x ${SH}
+all: ${TARGS}
+	chmod +x ${TARGS}
 
 dist:
 	mkdir -p ${DIST}
@@ -21,15 +22,18 @@ dist:
 
 install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin ${DESTDIR}${MANPREFIX}/man1
-	cp -f ${SH} ${DESTDIR}${PREFIX}/bin
-	cp -f ${MAN1} ${DESTDIR}${MANPREFIX}/man1
-	sed "s/VERSION/${VERSION}/g" < ${MAN1} > ${DESTDIR}${MANPREFIX}/man1/${MAN1}
-	chmod 755 ${DESTDIR}${PREFIX}/bin/${SH}
-	chmod 644 ${DESTDIR}${MANPREFIX}/man1/${MAN1}
+	cp -f ${TARGS} ${DESTDIR}${PREFIX}/bin
+	for targ in ${TARGS} ; do \
+		sed "s/VERSION/${VERSION}/g" < $${targ}.1 > ${DESTDIR}${MANPREFIX}/man1/$${targ}.1 \
+		chmod 755 ${DESTDIR}${PREFIX}/bin/$${targ} ; \
+		chmod 644 ${DESTDIR}${MANPREFIX}/man1/$${targ}.1 ; \
+	done
 
 uninstall:
-	rm -f ${DESTDIR}${PREFIX}/bin/${SH} \
-		${DESTDIR}${MANPREFIX}/man1/${MAN1}
+	for targ in ${TARGS} ; do \
+		rm -f ${DESTDIR}${PREFIX}/bin/$${targ} ; \
+		rm -f ${DESTDIR}${MANPREFIX}/man1/$${targ}.1 ; \
+	done
 
 clean:
 	rm -f ${DIST}.tar.gz

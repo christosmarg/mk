@@ -1,15 +1,14 @@
 # See LICENSE file for copyright and license details.
 # <++>
-.POSIX:
 
 include config.mk
 
-BIN = <++>
-DIST = ${BIN}-${VERSION}
-MAN1 = ${BIN}.1
+BIN=	<++>
+DIST= 	${BIN}-${VERSION}
+MAN1= 	${BIN}.1
 
-SRC = <++>
-OBJ = ${SRC:.<++>=.o}
+SRC=	<++>
+OBJ=	${SRC:.<++>=.o}
 
 all: options ${BIN}
 

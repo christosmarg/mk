@@ -1,15 +1,14 @@
 # See LICENSE file for copyright and license details.
 # <++>
-.POSIX:
 
 include config.mk
 
-LIB = <++>
-DIST = ${LIB}-${VERSION}
-MAN3 = ${LIB}.3
+LIB= 	<++>
+DIST= 	${LIB}-${VERSION}
+MAN3=	${LIB}.3
 
-SRC = <++>
-OBJ = ${SRC:.<++>=.o}
+SRC= 	<++>
+OBJ=	${SRC:.<++>=.o}
 
 all: options ${LIB}
 

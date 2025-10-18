@@ -1,15 +1,13 @@
 # See LICENSE file for copyright and license details.
 # <++>
-.POSIX:
 
-BIN = <++>
-CC = sdcc
-CPPFLAGS =
-CFLAGS = --use-non-free -mpic<++> -p<++> ${CPPFLAGS}
-PIC = <++>
+BIN= 	<++>
+CC= 	sdcc
+CFLAGS=	--use-non-free -mpic<++> -p<++>
+PIC=	<++>
 
-SRC = <++>
-OBJ = ${SRC:.c=.o}
+SRC= 	<++>
+OBJ= 	${SRC:.c=.o}
 
 all: options ${BIN}
 
